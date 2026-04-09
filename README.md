@@ -4,7 +4,9 @@ Berfungsi untuk mengatasi tingginya tingkat stres akademik dengan membantu mahas
 
 Fitur-Fitur yang kami berikan adalah:
 1.Smart Summarizer: Meringkas materi kuliah atau jurnal panjang menjadi poin-poin inti.
+
 2.Academic Parafraser: Menyusun ulang kalimat untuk menurunkan skor Turnitin (anti-plagiasi) tanpa mengubah makna asli.
+
 3.Grammar & PUEBI Fixer: Mengoreksi ejaan, tanda baca, dan struktur kalimat bahasa Indonesia.
 4.Abstract Translator: Menerjemahkan teks abstrak ke Bahasa Inggris dengan kosakata akademik (bukan terjemahan robotik biasa).
 5.Research Idea Generator: Menyarankan 5-10 ide judul skripsi berdasarkan kata kunci minat mahasiswa.
