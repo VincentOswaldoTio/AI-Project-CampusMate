@@ -44,3 +44,8 @@ Fitur-Fitur yang kami berikan adalah:
 
 20.Export to Word (.docx): Mengunduh seluruh hasil pekerjaan di atas langsung ke dalam format dokumen Microsoft Word yang siap diedit.
 
+# Anggota Kelompok
+-241110159 - Vincent Oswaldo Tio
+-241111080 - Vian William Kurniawan
+-241110363 - Jimmy Wijaya
+-241111564 - reagan
