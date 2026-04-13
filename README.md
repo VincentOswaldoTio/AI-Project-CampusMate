@@ -42,7 +42,18 @@ Fitur-Fitur yang kami berikan adalah:
 
 19.Argument Builder: Menyediakan poin-poin pro dan kontra untuk membantu mahasiswa menyusun esai argumentatif atau debat.
 
-20.Export to Word (.docx): Mengunduh seluruh hasil pekerjaan di atas langsung ke dalam format dokumen Microsoft Word yang siap diedit.
+20.Export to Word (.docx): Mengunduh seluruh hasil pekerjaan di atas langsung ke dalam format dokumen Microsoft Word 
+
+Proyek ini dikembangkan dalam rentang waktu 8 minggu dengan pendekatan Agile/Sprint, di mana setiap minggunya memiliki target penyelesaian fitur yang terukur:
+• Minggu 1 (Setup & Fondasi Awal): Persiapan repositori GitHub, instalasi environment (Python & Streamlit), pembuatan kerangka antarmuka (UI) utama, dan pengujian koneksi API AI.
+• Minggu 2 (Manipulasi Teks Dasar): Penyelesaian Fitur 1, 2, 3, 4, dan 16. Fokus pada logika dasar prompt untuk peringkas dokumen, parafrase akademik, perbaikan grammar, penerjemah abstrak, dan pengubah nada tulisan.
+• Minggu 3 (Ideasi & Struktur Tulisan): Penyelesaian Fitur 5, 6, dan 9. Fokus pada pembuatan generator ide riset, penyusunan kerangka bab otomatis, dan fitur penyederhana konsep teori.
+• Minggu 4 (Logika Riset Lanjutan): Penyelesaian Fitur 13 dan 19. Fokus pada logika prompt yang lebih kompleks untuk bantuan literature review dan penyusun poin argumen/debat.
+• Minggu 5 (Produktivitas & Komunikasi): Penyelesaian Fitur 7, 11, 12, dan 17. Implementasi modul keseharian mahasiswa seperti pembuat draf email dosen, ekstraktor to-do list, naskah presentasi, dan chatbot motivasi.
+• Minggu 6 (Format & Referensi Akademik): Penyelesaian Fitur 10, 14, dan 18. Fokus pada otomasi format sitasi, pembuat simulasi soal ujian untuk persiapan, dan rekomendasi kata kunci literatur.
+• Minggu 7 (Integrasi Pembacaan File): Penyelesaian Fitur 8 dan 15. Implementasi library khusus (seperti PyPDF2) agar aplikasi bisa membaca jurnal PDF yang diunggah dan menjelaskan data angka ke dalam narasi.
+• Minggu 8 (Ekspor File, Testing & Deployment): Penyelesaian Fitur 20 (Ekspor teks ke format Microsoft Word menggunakan library python-docx). Dilanjutkan dengan bug fixing menyeluruh dan peluncuran (deployment) aplikasi agar bisa diakses secara online.
+
 
 # Anggota Kelompok
 -241110159 - Vincent Oswaldo Tio
