@@ -1,6 +1,6 @@
 # 🎓 CampusMate AI
 
-> Asisten akademik berbasis AI untuk mahasiswa Indonesia — 19 fitur lengkap dalam satu aplikasi React.
+> Asisten akademik berbasis AI untuk mahasiswa Indonesia — 20 fitur lengkap dalam satu aplikasi React.
 
 ---
 
@@ -26,6 +26,10 @@ Proyek ini awalnya dibangun dengan **Streamlit (Python)**, kemudian dimigrasi pe
 ---
 
 ## Fitur Lengkap
+
+### 📝 API Open Router
+
+CampusMate menggunakan OpenRouter sebagai penyedia API. OpenRouter menyediakan akses gratis ke berbagai model AI dengan limit 20 request/menit dan 200 request/hari untuk tier gratis.
 
 ### 📝 Manipulasi Teks
 
