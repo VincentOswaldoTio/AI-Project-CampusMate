@@ -2193,7 +2193,7 @@ function HomePage({ onNavigate }) {
             lineHeight: 1.75,
           }}
         >
-          19 tools AI dalam satu platform — dirancang khusus untuk mahasiswa
+          20 tools AI dalam satu platform — dirancang khusus untuk mahasiswa
           Indonesia.
         </p>
       </div>
@@ -2208,10 +2208,10 @@ function HomePage({ onNavigate }) {
         }}
       >
         {[
-          ["19", "Fitur Lengkap"],
+          ["20", "Fitur Lengkap"],
           ["∞", "Tak Terbatas"],
           ["🇮🇩", "Bahasa Indonesia"],
-          ["⚡", "Gemini 1.5 Flash"],
+          ["⚡", "Open Router API"],
         ].map(([val, lbl]) => (
           <div
             key={lbl}
@@ -2731,10 +2731,10 @@ export default function App() {
             }}
           >
             <span style={{ color: "#4B5563", fontWeight: 600 }}>
-              Tim Pengembang
+              Pengembang
             </span>
             <br />
-            Vincent · Vian · Jimmy · Reagan
+            Vincent Oswaldo Tio
             <br />
             <span style={{ color: "#F59E0B" }}>v3.0' </span> · OpenRouter
           </div>
