@@ -120,38 +120,13 @@ cd campusmate
 npm install
 ```
 
-**3. Ganti file `src/App.jsx`**
-
-Salin seluruh isi file `CampusMate.jsx` yang sudah disediakan ke dalam `src/App.jsx`.
-
-**4. Bersihkan file yang tidak dibutuhkan**
-
-```bash
-# Hapus file default Vite yang tidak dipakai
-rm src/App.css src/index.css
-```
-
-**5. Update `src/main.jsx`** — pastikan isinya seperti ini:
-
-```jsx
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
-
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-);
-```
-
-**6. Jalankan aplikasi**
+**3. Jalankan aplikasi**
 
 ```bash
 npm run dev
 ```
 
-**7. Buka di browser**
+**4. Buka di browser**
 
 ```
 http://localhost:5173
