@@ -1,8 +1,11 @@
+import { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { AlertTriangle, Cpu, Layers } from 'lucide-react'
+import { AlertTriangle, Cpu, Layers, Sparkles } from 'lucide-react'
 import { useApiStore } from '@/store/apiStore'
 import { useHistory } from '@/hooks/useHistory'
 import FeatureCard from '@/components/shared/FeatureCard'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
 
 // Daftar 7 kategori utama
 const CATEGORIES = [
@@ -149,34 +152,85 @@ const FEATURES = [
 function Home() {
   const { apiKey } = useApiStore()
   const { items, totalUsed } = useHistory()
+  const [searchQuery, setSearchQuery] = useState('')
+
+  // Menentukan ucapan salam berdasarkan waktu lokal mahasiswa
+  const getGreeting = () => {
+    const hour = new Date().getHours()
+    if (hour >= 4 && hour < 11) return 'Selamat Pagi'
+    if (hour >= 11 && hour < 15) return 'Selamat Siang'
+    if (hour >= 15 && hour < 18.5) return 'Selamat Sore'
+    return 'Selamat Malam'
+  }
+
+  // Filter pencarian interaktif
+  const filteredFeatures = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase()
+    if (!query) return FEATURES
+    return FEATURES.filter((f) => 
+      f.title.toLowerCase().includes(query) ||
+      f.description.toLowerCase().includes(query) ||
+      f.category.toLowerCase().includes(query)
+    )
+  }, [searchQuery])
+
+  // Cek apakah sedang mencari
+  const isSearching = searchQuery.trim() !== ''
 
   return (
-    <div className="space-y-8">
-      {/* Header Halaman Singkat */}
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <div>
-          <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-foreground flex items-center gap-2">
-            <Layers className="h-6 w-6 text-primary" />
-            Alat Kerja Akademik
-          </h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            Asisten akademik berbasis AI untuk mempermudah perkuliahan dan riset ilmiah Anda.
-          </p>
-        </div>
+    <div className="space-y-6">
+      
+      {/* Premium Glassmorphic Hero Banner */}
+      <div className="relative overflow-hidden rounded-2xl border border-border/40 bg-gradient-to-br from-primary/5 via-card/50 to-muted/20 p-6 md:p-8 shadow-xs transition-all duration-300">
+        {/* Soft colorful glowing backgrounds */}
+        <div className="absolute -top-24 -right-24 h-48 w-48 rounded-full bg-primary/10 blur-3xl animate-pulse" style={{ animationDuration: '6s' }} />
+        <div className="absolute -bottom-24 -left-24 h-48 w-48 rounded-full bg-indigo-500/10 blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
 
-        {/* Stats Bar Tipis */}
-        <div className="grid grid-cols-3 gap-2 border border-border bg-card p-3 rounded-xl text-center md:w-80 shadow-xs">
-          <div>
-            <div className="text-base font-bold text-primary">{totalUsed}</div>
-            <div className="text-[10px] text-muted-foreground">Total Aksi</div>
+        <div className="relative z-10 space-y-4 max-w-3xl">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider select-none border border-primary/20">
+            <Cpu className="h-3 w-3 animate-spin" style={{ animationDuration: '6s' }} />
+            CampusMate AI Workspace
           </div>
-          <div className="border-x border-border">
-            <div className="text-base font-bold text-foreground">{items.length}</div>
-            <div className="text-[10px] text-muted-foreground">Riwayat</div>
-          </div>
-          <div>
-            <div className="text-base font-bold text-foreground">{items.filter(i => i.favorite).length}</div>
-            <div className="text-[10px] text-muted-foreground">Favorit</div>
+
+          <h1 className="text-xl md:text-3xl font-extrabold tracking-tight text-foreground leading-tight">
+            {getGreeting()}, <span className="bg-gradient-to-r from-blue-600 to-indigo-500 dark:from-blue-400 dark:to-indigo-300 bg-clip-text text-transparent">Pejuang Akademik!</span> ✨
+          </h1>
+          
+          <p className="text-xs md:text-sm text-muted-foreground leading-relaxed max-w-xl">
+            Selamat datang di hub produktivitas kuliah Anda. Cari dan buka 20 alat AI khusus untuk mempercepat penulisan skripsi, meriset referensi, atau merapikan draf tugas secara instan.
+          </p>
+
+          {/* Search bar & statistics */}
+          <div className="flex flex-col sm:flex-row gap-3 pt-2">
+            <div className="relative flex-1">
+              <input
+                type="text"
+                placeholder="Cari alat AI (misal: 'skripsi', 'penerjemah', 'email')..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full h-9 rounded-xl border border-border/40 bg-muted/10 pl-9 pr-4 text-xs focus:outline-none focus:ring-1 focus:ring-primary focus:bg-background/80 placeholder:text-muted-foreground/40 transition-all text-foreground"
+              />
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="absolute left-3.5 top-2.5 h-4 w-4 text-muted-foreground/50">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.637 10.636z" />
+              </svg>
+            </div>
+            
+            <div className="flex items-center justify-between sm:justify-start gap-4 px-4 h-9 rounded-xl border border-border/30 bg-card/60 text-xs shadow-2xs">
+              <div className="flex items-center gap-1.5">
+                <span className="font-extrabold text-primary tabular-nums">{totalUsed}</span>
+                <span className="text-muted-foreground text-[9px] uppercase font-bold tracking-wider">Aksi</span>
+              </div>
+              <div className="h-3 w-px bg-border/40" />
+              <div className="flex items-center gap-1.5">
+                <span className="font-extrabold text-foreground tabular-nums">{items.length}</span>
+                <span className="text-muted-foreground text-[9px] uppercase font-bold tracking-wider">Riwayat</span>
+              </div>
+              <div className="h-3 w-px bg-border/40" />
+              <div className="flex items-center gap-1.5">
+                <span className="font-extrabold text-foreground tabular-nums">{items.filter(i => i.favorite).length}</span>
+                <span className="text-muted-foreground text-[9px] uppercase font-bold tracking-wider">Favorit</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -201,41 +255,90 @@ function Home() {
         </div>
       )}
 
-      {/* Grid Fitur Dikelompokkan per Kategori */}
-      <div className="space-y-10">
-        {CATEGORIES.map((category) => {
-          // Filter fitur untuk kategori ini
-          const categoryFeatures = FEATURES.filter((f) => f.category === category)
-          
-          if (categoryFeatures.length === 0) return null
+      {/* RENDER FEATURE GRID */}
+      {isSearching ? (
+        /* Skenario A: Mode Pencarian Aktif */
+        <div className="space-y-4 pt-2">
+          <div className="flex items-center justify-between border-b border-border/40 pb-2">
+            <h2 className="text-xs font-bold tracking-wider text-muted-foreground uppercase flex items-center gap-2">
+              <Sparkles className="h-3.5 w-3.5 text-primary" />
+              Hasil Pencarian Untuk "{searchQuery}"
+            </h2>
+            <span className="text-[10px] text-muted-foreground font-bold bg-muted px-2 py-0.5 rounded-md">
+              {filteredFeatures.length} Ditemukan
+            </span>
+          </div>
 
-          return (
-            <div key={category} className="space-y-4">
-              <div className="flex items-center gap-2 border-b border-border/60 pb-2">
-                <h2 className="text-base font-bold tracking-tight text-foreground/90 uppercase">
-                  {category}
-                </h2>
-                <span className="text-xs text-muted-foreground font-medium bg-muted px-2 py-0.5 rounded-md">
-                  {categoryFeatures.length} Alat
-                </span>
-              </div>
-
-              {/* Grid 2-3 Kolom Responsif */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {categoryFeatures.map((feature) => (
-                  <FeatureCard
-                    key={feature.path}
-                    title={feature.title}
-                    description={feature.description}
-                    category={feature.category}
-                    path={feature.path}
-                  />
-                ))}
-              </div>
+          {filteredFeatures.length === 0 ? (
+            <Card className="border border-dashed border-border/40 bg-muted/5 text-center p-12 rounded-2xl">
+              <CardContent className="p-4 flex flex-col items-center justify-center space-y-3">
+                <div className="p-3 bg-muted rounded-full text-muted-foreground">
+                  <Layers className="h-6 w-6" />
+                </div>
+                <div className="space-y-1">
+                  <h3 className="text-sm font-bold text-foreground">Tidak Ada Alat yang Cocok</h3>
+                  <p className="text-xs text-muted-foreground max-w-xs mx-auto leading-relaxed">
+                    Kami tidak menemukan alat AI dengan nama atau kategori pencarian "{searchQuery}". Coba kata kunci lainnya.
+                  </p>
+                </div>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => setSearchQuery('')}
+                  className="h-8 text-xs font-bold rounded-lg border-border/40"
+                >
+                  Bersihkan Pencarian
+                </Button>
+              </CardContent>
+            </Card>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {filteredFeatures.map((feature) => (
+                <FeatureCard
+                  key={feature.path}
+                  title={feature.title}
+                  description={feature.description}
+                  category={feature.category}
+                  path={feature.path}
+                />
+              ))}
             </div>
-          )
-        })}
-      </div>
+          )}
+        </div>
+      ) : (
+        /* Skenario B: Mode Default Grouped Kategori */
+        <div className="space-y-10 pt-2">
+          {CATEGORIES.map((category) => {
+            const categoryFeatures = FEATURES.filter((f) => f.category === category)
+            if (categoryFeatures.length === 0) return null
+
+            return (
+              <div key={category} className="space-y-4">
+                <div className="flex items-center gap-2 border-b border-border/60 pb-2">
+                  <h2 className="text-xs font-bold tracking-wider text-muted-foreground uppercase">
+                    {category}
+                  </h2>
+                  <span className="text-[9px] text-muted-foreground font-bold bg-muted px-2 py-0.5 rounded-md">
+                    {categoryFeatures.length} Alat
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {categoryFeatures.map((feature) => (
+                    <FeatureCard
+                      key={feature.path}
+                      title={feature.title}
+                      description={feature.description}
+                      category={feature.category}
+                      path={feature.path}
+                    />
+                  ))}
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      )}
     </div>
   )
 }
