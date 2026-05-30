@@ -15,6 +15,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { toast } from 'sonner'
 import { useExport } from '@/hooks/useExport'
 import EmptyState from './EmptyState'
+import { cleanMarkdownForCopy } from '@/lib/utils'
 
 /**
  * Komponen area output AI premium dengan rendering Markdown profesional.
@@ -51,7 +52,8 @@ export default function OutputBox({
   const handleCopy = async () => {
     if (!content) return
     try {
-      await navigator.clipboard.writeText(content)
+      const cleanText = cleanMarkdownForCopy(content)
+      await navigator.clipboard.writeText(cleanText)
       setCopied(true)
       toast.success('Teks berhasil disalin ke clipboard!')
       setTimeout(() => setCopied(false), 2000)

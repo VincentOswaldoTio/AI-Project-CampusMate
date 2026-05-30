@@ -31,8 +31,12 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { useHistory } from '@/hooks/useHistory'
-import { getRelativeTimestamp } from '@/lib/utils'
+import { getRelativeTimestamp, cleanMarkdownForCopy } from '@/lib/utils'
 import { toast } from 'sonner'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import rehypeHighlight from 'rehype-highlight'
+import 'highlight.js/styles/github-dark.min.css'
 
 // 7 Kategori Akademis untuk pemetaan dropdown filter
 const CATEGORIES = [
@@ -69,7 +73,8 @@ function History() {
   const handleCopy = async (e, id, text) => {
     e.stopPropagation() // Mencegah memicu expand kartu
     try {
-      await navigator.clipboard.writeText(text)
+      const cleanText = cleanMarkdownForCopy(text)
+      await navigator.clipboard.writeText(cleanText)
       setCopiedItemId(id)
       toast.success("Teks berhasil disalin ke clipboard!")
       setTimeout(() => setCopiedItemId(null), 2000)
@@ -378,11 +383,91 @@ function History() {
                         {item.output.length > 150 ? item.output.substring(0, 150) + '...' : item.output}
                       </p>
                     ) : (
-                      /* Expanded Mode (Monospace, Full Output Box ala Editor Kode) */
-                      <div className="bg-[#F6F8FA] dark:bg-[#0D1117] border border-border/40 p-3 rounded-lg text-[11px] leading-[1.6] overflow-x-auto transition-all select-text">
-                        <pre className="font-mono text-foreground whitespace-pre-wrap break-all select-text">
-                          {item.output}
-                        </pre>
+                      /* Expanded Mode (Markdown Rendered ala OutputBox) */
+                      <div className="bg-[#F6F8FA] dark:bg-[#0D1117] border border-border/40 p-4 rounded-lg text-[12px] leading-relaxed overflow-x-auto transition-all select-text" onClick={(e) => e.stopPropagation()}>
+                        <div className="cm-prose select-text">
+                          <ReactMarkdown
+                            remarkPlugins={[remarkGfm]}
+                            rehypePlugins={[rehypeHighlight]}
+                            components={{
+                              p({ children }) {
+                                return <p className="text-[12px] leading-[1.7] text-foreground/90 mb-2 last:mb-0">{children}</p>
+                              },
+                              h1({ children }) {
+                                return <h1 className="text-[14px] font-bold text-primary mt-4 mb-2 first:mt-0">{children}</h1>
+                              },
+                              h2({ children }) {
+                                return <h2 className="text-[13px] font-bold text-primary mt-3.5 mb-1.5 first:mt-0 border-b border-border/20 pb-1">{children}</h2>
+                              },
+                              h3({ children }) {
+                                return <h3 className="text-[12.5px] font-bold text-foreground mt-3 mb-1 first:mt-0">{children}</h3>
+                              },
+                              ul({ children }) {
+                                return <ul className="list-disc pl-4 space-y-0.5 mb-2 text-[12px] leading-[1.6] marker:text-primary/60">{children}</ul>
+                              },
+                              ol({ children }) {
+                                return <ol className="list-decimal pl-4 space-y-0.5 mb-2 text-[12px] leading-[1.6] marker:text-primary/60 marker:font-semibold">{children}</ol>
+                              },
+                              li({ children }) {
+                                return <li className="pl-0.5">{children}</li>
+                              },
+                              strong({ children }) {
+                                return <strong className="font-bold text-foreground">{children}</strong>
+                              },
+                              em({ children }) {
+                                return <em className="italic text-foreground/80">{children}</em>
+                              },
+                              blockquote({ children }) {
+                                return (
+                                  <blockquote className="border-l-2 border-primary/60 bg-primary/5 dark:bg-primary/10 px-3 py-1.5 my-2 rounded-r-md italic text-[12px] leading-relaxed text-foreground/80">
+                                    {children}
+                                  </blockquote>
+                                )
+                              },
+                              pre({ children }) {
+                                return (
+                                  <pre className="!bg-[#0D1117] dark:!bg-[#161B22] !text-[#E6EDF3] rounded-md p-3 text-[11px] leading-relaxed overflow-x-auto border border-border/20 my-2">
+                                    {children}
+                                  </pre>
+                                )
+                              },
+                              code({ className, children, ...props }) {
+                                const isInline = !className
+                                if (isInline) {
+                                  return (
+                                    <code className="bg-muted/40 dark:bg-white/10 text-primary dark:text-blue-300 px-1 py-0.5 rounded text-[11px] font-mono font-semibold" {...props}>
+                                      {children}
+                                    </code>
+                                  )
+                                }
+                                return <code className={className} {...props}>{children}</code>
+                              },
+                              table({ children }) {
+                                return (
+                                  <div className="overflow-x-auto my-2 rounded border border-border/30">
+                                    <table className="w-full text-[11px] border-collapse">
+                                      {children}
+                                    </table>
+                                  </div>
+                                )
+                              },
+                              thead({ children }) {
+                                return <thead className="bg-muted/30 dark:bg-white/5">{children}</thead>
+                              },
+                              th({ children }) {
+                                return <th className="px-2.5 py-1.5 text-left text-[10px] font-bold uppercase tracking-wider text-foreground/70 border-b border-border/30">{children}</th>
+                              },
+                              td({ children }) {
+                                return <td className="px-2.5 py-1.5 text-[11px] text-foreground/80 border-b border-border/10">{children}</td>
+                              },
+                              tr({ children }) {
+                                return <tr className="even:bg-muted/5 dark:even:bg-white/[0.01] hover:bg-muted/10 transition-colors">{children}</tr>
+                              }
+                            }}
+                          >
+                            {item.output}
+                          </ReactMarkdown>
+                        </div>
                       </div>
                     )}
                   </div>
