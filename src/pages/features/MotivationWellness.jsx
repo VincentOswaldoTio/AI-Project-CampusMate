@@ -7,6 +7,8 @@ import { Separator } from '@/components/ui/separator'
 import { useApiStore } from '@/store/apiStore'
 import { PROMPTS } from '@/lib/prompts'
 import { toast } from 'sonner'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 
 const WELCOME_MESSAGE = {
   role: 'assistant',
@@ -172,13 +174,57 @@ export default function MotivationWellness() {
 
                 {/* Message Bubble */}
                 <div
-                  className={`rounded-2xl px-4 py-3 text-[13px] leading-relaxed whitespace-pre-wrap break-words ${
+                  className={`rounded-2xl px-4 py-3 text-[13px] leading-relaxed break-words ${
                     msg.role === 'user'
-                      ? 'bg-primary text-primary-foreground rounded-br-md'
+                      ? 'bg-primary text-primary-foreground rounded-br-md whitespace-pre-wrap'
                       : 'bg-muted/20 border border-border/30 text-foreground rounded-bl-md'
                   }`}
                 >
-                  {msg.content}
+                  {msg.role === 'user' ? (
+                    msg.content
+                  ) : (
+                    <ReactMarkdown
+                      remarkPlugins={[remarkGfm]}
+                      components={{
+                        p({ children }) {
+                          return <p className="mb-2.5 last:mb-0 leading-relaxed text-[13px] text-foreground/90">{children}</p>
+                        },
+                        ul({ children }) {
+                          return <ul className="list-disc pl-4 space-y-1 my-2 text-[13px] text-foreground/90 marker:text-pink-500/60">{children}</ul>
+                        },
+                        ol({ children }) {
+                          return <ol className="list-decimal pl-4 space-y-1 my-2 text-[13px] text-foreground/90 marker:text-pink-500/60 marker:font-semibold">{children}</ol>
+                        },
+                        li({ children }) {
+                          return <li className="pl-0.5">{children}</li>
+                        },
+                        strong({ children }) {
+                          return <strong className="font-bold text-foreground">{children}</strong>
+                        },
+                        em({ children }) {
+                          return <em className="italic text-foreground/80">{children}</em>
+                        },
+                        h1({ children }) {
+                          return <h1 className="text-[14px] font-bold text-pink-600 dark:text-pink-400 mt-3 mb-1.5 first:mt-0">{children}</h1>
+                        },
+                        h2({ children }) {
+                          return <h2 className="text-[13px] font-bold text-pink-600 dark:text-pink-400 mt-2.5 mb-1.5 first:mt-0">{children}</h2>
+                        },
+                        h3({ children }) {
+                          return <h3 className="text-[12.5px] font-bold text-foreground mt-2 mb-1 first:mt-0">{children}</h3>
+                        },
+                        blockquote({ children }) {
+                          return (
+                            <blockquote className="border-l-2 border-pink-500/60 bg-pink-500/5 dark:bg-pink-500/10 px-3 py-1.5 my-2.5 rounded-r-md italic text-[12px] leading-relaxed text-foreground/80">
+                              {children}
+                            </blockquote>
+                          )
+                        }
+                      }}
+                    >
+                      {msg.content}
+                    </ReactMarkdown>
+                  )}
                 </div>
               </div>
             </div>

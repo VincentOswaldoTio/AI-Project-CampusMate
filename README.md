@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://campusmate-ai.vercel.app">
+  <a href="https://campus-mate-ashy.vercel.app/">
     <img src="https://img.shields.io/badge/▲%20Deploy-Vercel-black?style=for-the-badge&logo=vercel" alt="Deploy on Vercel" />
   </a>
   <img src="https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=white" alt="React 18" />
@@ -25,6 +25,9 @@
 **CampusMate AI** adalah platform web modern yang menyediakan **20 fitur AI** untuk membantu mahasiswa Indonesia dalam perkuliahan, riset, dan penulisan ilmiah. Dibangun dengan teknologi terkini dan desain yang terinspirasi dari **Linear**, **Vercel Dashboard**, dan **Raycast** — CampusMate dirancang agar terasa seperti _tools_ modern yang mahasiswa ingin buka setiap hari.
 
 Semua fitur didukung oleh model bahasa besar (LLM) melalui **OpenRouter API**, memberikan fleksibilitas untuk memilih model AI yang paling sesuai dengan kebutuhan.
+
+> [!TIP]
+> **Live Demo & Preview:** Anda dapat langsung mencoba aplikasi tanpa perlu menjalankannya secara lokal melalui link deployment berikut: **[https://campus-mate-ashy.vercel.app/](https://campus-mate-ashy.vercel.app/)** 🚀
 
 ---
 
