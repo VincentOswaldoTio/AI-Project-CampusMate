@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { useApiStore } from '@/store/apiStore'
+import { useHistory } from '@/hooks/useHistory'
 import { PROMPTS } from '@/lib/prompts'
 import { toast } from 'sonner'
 import ReactMarkdown from 'react-markdown'
@@ -19,6 +20,7 @@ export default function MotivationWellness() {
   const [messages, setMessages] = useState([WELCOME_MESSAGE])
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const { saveToHistory } = useHistory()
   const scrollRef = useRef(null)
   const inputRef = useRef(null)
 
@@ -88,6 +90,13 @@ export default function MotivationWellness() {
 
       if (assistantText) {
         setMessages(prev => [...prev, { role: 'assistant', content: assistantText }])
+        saveToHistory({
+          feature: 'motivation-wellness',
+          featureName: 'Motivation & Wellness',
+          category: 'Kesejahteraan',
+          input: trimmed.length > 150 ? trimmed.substring(0, 150) + '...' : trimmed,
+          output: assistantText
+        })
       } else {
         toast.error('Respons kosong dari AI.')
       }
