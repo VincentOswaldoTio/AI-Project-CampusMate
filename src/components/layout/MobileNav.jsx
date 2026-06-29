@@ -13,7 +13,8 @@ import {
   CheckCircle2,
   Heart,
   Calendar,
-  X
+  X,
+  Beaker
 } from 'lucide-react'
 import { 
   Dialog, 
@@ -109,6 +110,15 @@ export default function MobileNav() {
       )}>
         <Home className="h-5 w-5 mb-0.5" />
         <span>Beranda</span>
+      </Link>
+
+      {/* Tab 2: AI Lab */}
+      <Link to="/ai-sandbox" className={cn(
+        "flex flex-col items-center justify-center flex-1 py-1 text-[10px] font-bold tracking-tight transition-all duration-200",
+        isActive("/ai-sandbox") ? "text-primary" : "text-muted-foreground"
+      )}>
+        <Beaker className="h-5 w-5 mb-0.5" />
+        <span>AI Lab</span>
       </Link>
 
       {/* Tab 2: Fitur (Membuka Bottom Sheet) */}

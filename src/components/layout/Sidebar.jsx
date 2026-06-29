@@ -12,7 +12,8 @@ import {
   Sparkles, 
   CheckCircle2, 
   Heart, 
-  Calendar
+  Calendar,
+  Beaker
 } from 'lucide-react'
 import { useApiStore } from '@/store/apiStore'
 import { cn } from '@/lib/utils'
@@ -139,6 +140,16 @@ export default function Sidebar() {
             )}>
               <Home className="h-3.5 w-3.5" />
               <span>Beranda</span>
+            </Link>
+
+            <Link to="/ai-sandbox" className={cn(
+              "flex items-center gap-2.5 px-3 h-8 rounded-md text-[0.8125rem] font-medium transition-all duration-150 ease-out",
+              isActive("/ai-sandbox") 
+                ? "bg-primary/10 border-l-2 border-primary rounded-l-none text-primary font-semibold" 
+                : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
+            )}>
+              <Beaker className="h-3.5 w-3.5" />
+              <span>AI Lab Simulator</span>
             </Link>
             
             <Link to="/history" className={cn(

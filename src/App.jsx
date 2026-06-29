@@ -29,6 +29,7 @@ import PresentationScript from './pages/features/PresentationScript'
 import MotivationWellness from './pages/features/MotivationWellness'
 import ThesisProgressTracker from './pages/features/ThesisProgressTracker'
 import StudyScheduleGenerator from './pages/features/StudyScheduleGenerator'
+import AISandbox from './pages/AISandbox'
 
 function App() {
   const { theme } = useApiStore()
@@ -52,6 +53,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/history" element={<History />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/ai-sandbox" element={<AISandbox />} />
 
           {/* 1. Manipulasi Teks */}
           <Route path="/features/smart-summarizer" element={<SmartSummarizer />} />
