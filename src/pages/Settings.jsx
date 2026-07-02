@@ -298,13 +298,17 @@ function Settings() {
                 </SelectTrigger>
                 <SelectContent className="border-border/40">
                   <SelectItem value="openrouter/auto">Auto (Otomatis memilih model optimal)</SelectItem>
-                  <SelectItem value="deepseek/deepseek-chat">DeepSeek V4 Flash</SelectItem>
-                  <SelectItem value="qwen/qwen-2.5-coder-32b-instruct">Qwen3 Coder</SelectItem>
-                  <SelectItem value="meta-llama/llama-3.3-70b-instruct">Llama 4</SelectItem>
+                  <SelectItem value="google/gemini-2.5-flash:free">Gemini 2.5 Flash Free (Gratis, 1M Context - Sangat Direkomendasikan)</SelectItem>
+                  <SelectItem value="deepseek/deepseek-r1:free">DeepSeek R1 Reasoning Free (Gratis, Penalaran Logis Terpopuler)</SelectItem>
+                  <SelectItem value="meta-llama/llama-3.3-70b-instruct:free">Llama 3.3 70B Free (Gratis, Model Besar &amp; Akurat)</SelectItem>
+                  <SelectItem value="qwen/qwen-2.5-coder-32b-instruct:free">Qwen 2.5 Coder 32B Free (Gratis, Handal untuk Logika &amp; Kode)</SelectItem>
+                  <SelectItem value="anthropic/claude-3.5-sonnet">Claude 3.5 Sonnet (Berbayar, Kualitas Terbaik untuk Karya Ilmiah)</SelectItem>
+                  <SelectItem value="anthropic/claude-3.5-haiku">Claude 3.5 Haiku (Berbayar, Sangat Cepat &amp; Responsif)</SelectItem>
+                  <SelectItem value="deepseek/deepseek-chat">DeepSeek V3 / Chat (Berbayar Sangat Murah &amp; Cepat)</SelectItem>
                 </SelectContent>
               </Select>
               <p className="text-[10px] text-muted-foreground leading-relaxed pl-0.5">
-                Rekomendasi menggunakan <strong>Auto</strong> karena sistem akan secara cerdas menyesuaikan jenis model optimal berdasarkan kebutuhan tugas akademik spesifik Anda.
+                Rekomendasi menggunakan <strong>Gemini 2.5 Flash Free</strong> untuk ringkasan jurnal panjang karena memiliki konteks 1 juta token, atau <strong>Auto</strong> agar sistem mencocokkan secara otomatis.
               </p>
             </div>
           </CardContent>
